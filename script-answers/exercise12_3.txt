@@ -1,0 +1,4 @@
+~$ docker run -it ubuntu bash
+/# nano /usr/src/app/index.js
+/# exit
+
