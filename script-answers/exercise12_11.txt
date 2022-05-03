@@ -1,0 +1,17 @@
+$ docker exec -it todo-backend_redis_1 bash
+:/data# redis-cli
+127.0.0.1:6379> KEYS *
+1) "postcount"
+127.0.0.1:6379> GET postcount
+"1"
+127.0.0.1:6379> SET postcount 9001
+OK
+127.0.0.1:6379> GET postcount
+"9001"
+127.0.0.1:6379> GET postcount
+"9002"
+127.0.0.1:6379> DEL postcount
+(integer) 1
+127.0.0.1:6379> GET postcount
+"1"
+
