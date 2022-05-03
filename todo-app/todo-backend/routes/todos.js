@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
   if (!count) {
     await setAsync('postcount', 1)
   } else {
-    await setAsync('postcount', count+1)
+    await setAsync('postcount', Number(count)+1)
   }
   res.send(todo);
 });
