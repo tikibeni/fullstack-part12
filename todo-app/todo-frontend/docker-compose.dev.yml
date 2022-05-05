@@ -1,0 +1,11 @@
+services:
+  app:
+    image: todo-frontend-dev # Run via 'docker-compose -f docker-compose.dev.yml up'
+    build:
+      context: . # The context will pick this dir as the "build context"
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3000:3000
+    container_name: todo-frontend-dev
