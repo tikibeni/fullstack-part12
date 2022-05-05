@@ -10,7 +10,9 @@ ENV REACT_APP_BACKEND_URL=http://localhost:3000
 
 RUN npm run build
 
-RUN npm install -g serve
+#  Needs to be run with `$ docker run -p 8000:80 todo-frontend`
 
-CMD ["serve", "build"]
+FROM nginx:1.20-alpine
+
+COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html
 
