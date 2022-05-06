@@ -48,17 +48,11 @@ singleRouter.get('/', async (req, res) => {
 
 /* PUT todo. */
 singleRouter.put('/', async (req, res) => {
-  const body = req.body
-  const todo = {
-    text: body.text,
-    done: body.done
-  }
-
-  Todo.findOneAndUpdate(req.params.id, todo, { new: true, useFindAndModify: true })
-      .then(updatedTodo => {
-        res.send(updatedTodo)
-      })
-      .catch(e => res.sendStatus(400).end())
+  const { text, done } = req.body
+  const updatedTodo = await Todo.findOneAndUpdate(
+      {_id: req.todo._id}, { text, done }, { new: true, useFindAndModify: false }
+  )
+  res.status(200).send(updatedTodo)
 });
 
 router.use('/:id', findByIdMiddleware, singleRouter)
