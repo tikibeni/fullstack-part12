@@ -26,3 +26,9 @@ You can access the app via http://localhost:8080.
 ```sh
 my-app$ docker-compose -f docker-compose.dev.yml up
 ```
+
+#### Production:
+
+```sh
+my-app$ docker-compose up
+```
