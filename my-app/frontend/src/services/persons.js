@@ -1,7 +1,7 @@
 // Palvelukomponentti, joka vastaa palvelimen kanssa kommunikoinnista
 import axios from 'axios'
 
-const baseUrl = '/api/persons'
+const baseUrl = process.env.REACT_APP_BACKEND_URL
 
 const getAll = () => {
     const request = axios.get(baseUrl)

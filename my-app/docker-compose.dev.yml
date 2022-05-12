@@ -7,7 +7,10 @@ services:
     volumes:
       - ./frontend/:/usr/src/app
     ports:
-      - 3001:3000
+    - 3000:3000
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:3001/api/persons
+    stdin_open: true
 
   my-app-backend:
     image: my-app-backend
@@ -17,7 +20,7 @@ services:
     volumes:
       - ./backend/:/usr/src/app
     ports:
-      - 3000:3000
+      - 3001:3001
 
   nginx:
     image: nginx:1.20.1
