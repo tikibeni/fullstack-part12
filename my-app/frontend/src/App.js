@@ -1,6 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+
 import Persons from './components/Persons'
+import PersonForm from "./components/PersonForm";
+import Notification from "./components/Notification";
+import Filter from "./components/Filter";
+
 import personService from './services/persons'
+
 import './index.css'
 
 const App = () => {
@@ -99,7 +105,7 @@ const App = () => {
               }, 5000)
 
           })
-          .catch(error => {
+          .catch(_ => {
               setErrorMessage(
                 `Person '${person.name}' was already deleted from server`
               )
@@ -118,14 +124,14 @@ const App = () => {
         if (window.confirm(`Delete ${personToBeDeleted.name}?`)) {
             personService
               .remove(personToBeDeleted.id)
-              .then(res => {
+              .then(_ => {
                   setPersons(persons.filter(person => person.name !== personToBeDeleted.name))
                   setSuccessMessage(`Deleted '${personToBeDeleted.name}'`)
                   setTimeout(() => {
                       setSuccessMessage(null)
                   }, 5000)
               })
-              .catch(error => {
+              .catch(_ => {
                   setErrorMessage(
                     `Person '${personToBeDeleted.name}' is already deleted from the server`
                   )
@@ -151,57 +157,6 @@ const App = () => {
             <h2>Numbers</h2>
             <Persons persons={personsToShow} deleteFunction={deletePerson} />
         </div>
-    )
-}
-
-// Henkilön lisäyskaavakkeen renderöinnistä vastaava komponentti
-const PersonForm = ({addPerson, nameValue, nameHandler, numberValue, numberHandler}) => {
-    return (
-        <form onSubmit={addPerson}>
-            <div>
-                Name: 
-                <input
-                  value={nameValue}
-                  onChange={nameHandler}
-                />
-            </div>
-            <div>
-                Number:
-                <input
-                  value={numberValue}
-                  onChange={numberHandler}
-                />
-            </div>
-            <div>
-                <button type="submit">add</button>
-            </div>
-        </form>
-    )
-}
-
-// Filtterin renderöinnistä vastaava komponentti
-const Filter = ({value, filterHandler}) => {
-    return (
-        <div>
-            Filter:
-            <input
-              value={value}
-              onChange={filterHandler}
-            />
-        </div>
-    )
-}
-
-// Vastaa ilmoituksen oikeanlaisesta renderöinnistä
-const Notification = ({message, notificationType}) => {
-    if (message === null) {
-        return null
-    }
-
-    return (
-        <div className={notificationType}>
-            {message}
-         </div>
     )
 }
 
